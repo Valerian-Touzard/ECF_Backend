@@ -22,7 +22,7 @@ public class LocataireController {
     }
 
     @GetMapping("{id}")
-    public Locataire findById(String id) {
+    public Locataire findById(@PathVariable String id) {
         return locataireService.findById(id);
     }
 
@@ -32,7 +32,7 @@ public class LocataireController {
     }
 
     @DeleteMapping("{id}")
-    public void deleteById(String id) {
+    public void deleteById(@PathVariable String id) {
         locataireService.deleteById(id);
     }
 }
