@@ -46,6 +46,7 @@ public class LocationServiceImp implements LocationService {
     public void deleteById(String id) {
         Location location = this.findById(id);
         Vehicule vehicule = location.getVehicule();
+        System.out.println(vehicule);
         vehicule.setDispo(true);
         this.vehiculeService.save(vehicule);
         locationRepository.deleteById(id);
