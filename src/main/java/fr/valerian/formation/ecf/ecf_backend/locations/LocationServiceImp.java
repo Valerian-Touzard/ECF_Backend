@@ -1,17 +1,30 @@
 package fr.valerian.formation.ecf.ecf_backend.locations;
 
+import fr.valerian.formation.ecf.ecf_backend.locataires.Locataire;
+import fr.valerian.formation.ecf.ecf_backend.locataires.LocataireService;
+import fr.valerian.formation.ecf.ecf_backend.locations.dto.LocationFront;
+import fr.valerian.formation.ecf.ecf_backend.vehicules.Vehicule;
+import fr.valerian.formation.ecf.ecf_backend.vehicules.VehiculeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 public class LocationServiceImp implements LocationService {
 
     private final LocationRepository locationRepository;
 
-    public LocationServiceImp(LocationRepository locationRepository) {
+    private final LocataireService locataireService;
+
+    private final VehiculeService vehiculeService;
+
+    public LocationServiceImp(LocationRepository locationRepository,
+                              LocataireService locataireService,
+                              VehiculeService vehiculeService
+    ) {
         this.locationRepository = locationRepository;
+        this.locataireService = locataireService;
+        this.vehiculeService = vehiculeService;
     }
 
     @Override
@@ -31,6 +44,33 @@ public class LocationServiceImp implements LocationService {
 
     @Override
     public void deleteById(String id) {
+        Location location = this.findById(id);
+        Vehicule vehicule = location.getVehicule();
+        vehicule.setDispo(true);
+        this.vehiculeService.save(vehicule);
         locationRepository.deleteById(id);
     }
+
+    @Override
+    public Location ajouterLocation(String idVehicule, LocationFront location) {
+        Location location1 = new Location();
+        Vehicule vehicule = this.vehiculeService.findById(idVehicule);
+        System.out.println(location.getLocataire());
+        Locataire locataire = this.locataireService.findById(location.getLocataire());
+
+
+        location1.setId(location.getId());
+        location1.setLocataire(locataire);
+        location1.setImma(location.getImma());
+        location1.setDateDebut(location.getDateDebut());
+        location1.setDateFin(location.getDateFin());
+        location1.setPrixLoca(location.getPrixLoca());
+
+
+        vehicule.getLocations().add(location1);
+        vehicule.setDispo(false);
+        this.vehiculeService.save(vehicule);
+        return this.save(location1);
+    }
+
 }

@@ -1,11 +1,13 @@
 package fr.valerian.formation.ecf.ecf_backend.vehicules;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.valerian.formation.ecf.ecf_backend.locations.Location;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -22,5 +24,6 @@ public class Vehicule {
     private String prix;
     private Boolean dispo;
 
-    private List<Location> locations;
+
+    private List<Location> locations = new ArrayList<>();
 }

@@ -1,5 +1,8 @@
 package fr.valerian.formation.ecf.ecf_backend.locations;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import fr.valerian.formation.ecf.ecf_backend.locataires.Locataire;
+import fr.valerian.formation.ecf.ecf_backend.vehicules.Vehicule;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,9 +18,10 @@ import java.time.LocalDate;
 public class Location {
     private String id;
     @DBRef
-    private String idVehicule;
+    private Locataire locataire;
     @DBRef
-    private String idLocataire;
+    @JsonIgnore
+    private Vehicule vehicule;
     private String imma;
     private LocalDate dateDebut;
     private LocalDate dateFin;

@@ -11,10 +11,8 @@ import java.util.List;
 
 public class VehiculeServiceImp implements VehiculeService {
     private final VehiculeRepository vehiculeRepository;
-    private final LocationService locationService;
-    public VehiculeServiceImp(VehiculeRepository vehiculeRepository, LocationService locationService) {
+    public VehiculeServiceImp(VehiculeRepository vehiculeRepository) {
         this.vehiculeRepository = vehiculeRepository;
-        this.locationService = locationService;
     }
 
     @Override
@@ -37,27 +35,27 @@ public class VehiculeServiceImp implements VehiculeService {
         vehiculeRepository.deleteById(id);
     }
 
-    @Override
-    public Vehicule ajouterLocation(String idLocataire, String idVehicule, Location location){
-        // On récupère les informations du locataire et du véhicules
-        Vehicule vehicule = this.findById(idVehicule);
+//    @Override
+//    public Vehicule ajouterLocation(String idLocataire, String idVehicule, Location location){
+//        // On récupère les informations du locataire et du véhicules
+//        Vehicule vehicule = this.findById(idVehicule);
+//
+//        // On enregistre le locataire et le véhicule dans l'objet location
+////        location.setIdVehicule(idVehicule);
+////        location.setIdLocataire(idLocataire);
+////        location.setImma(vehicule.getImma());
+//        vehicule.getLocations().add(location);
+//        this.locationService.save(location);
+//        return this.save(vehicule);
+//    }
 
-        // On enregistre le locataire et le véhicule dans l'objet location
-//        location.setIdVehicule(idVehicule);
-//        location.setIdLocataire(idLocataire);
-//        location.setImma(vehicule.getImma());
-        vehicule.getLocations().add(location);
-
-        return this.save(vehicule);
-    }
-
-    @Override
-    public Vehicule supprimerLocation(String idVehicule, String idLocation){
-        Vehicule vehicule = this.findById(idVehicule);
-        Location locationASupprimer = this.locationService.findById(idLocation);
-
-        vehicule.getLocations().removeIf(location -> locationASupprimer.getId().equals(location.getId()));
-        this.locationService.deleteById(idLocation);
-        return this.save(vehicule);
-    }
+//    @Override
+//    public Vehicule supprimerLocation(String idVehicule, String idLocation){
+//        Vehicule vehicule = this.findById(idVehicule);
+//        Location locationASupprimer = this.locationService.findById(idLocation);
+//
+//        vehicule.getLocations().removeIf(location -> locationASupprimer.getId().equals(location.getId()));
+//        this.locationService.deleteById(idLocation);
+//        return this.save(vehicule);
+//    }
 }

@@ -39,7 +39,7 @@ public interface VehiculeService {
      * @param idVehicule String ->l'id du véhicule
      * @return Location -> la nouvelle location
      */
-    Vehicule ajouterLocation(String idLocataire, String idVehicule, Location idLocation);
+//    Vehicule ajouterLocation(String idLocataire, String idVehicule, Location idLocation);
 
     /**
      * Permet de supprimer la location d'un véhicule
@@ -47,5 +47,5 @@ public interface VehiculeService {
      * @param idLocation String -> l'id de la location
      * @return Vehicule -> Le vehicule avec suppression de la location
      */
-    Vehicule supprimerLocation(String idVehicule, String idLocation);
+//    Vehicule supprimerLocation(String idVehicule, String idLocation);
 }

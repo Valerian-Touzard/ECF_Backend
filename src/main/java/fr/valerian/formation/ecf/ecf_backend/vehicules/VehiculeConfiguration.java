@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class VehiculeConfiguration {
     @Bean
-    public VehiculeService vehiculeService(VehiculeRepository vehiculeRepository, LocationService locationService){
-        return new VehiculeServiceImp(vehiculeRepository, locationService);
+    public VehiculeService vehiculeService(VehiculeRepository vehiculeRepository){
+        return new VehiculeServiceImp(vehiculeRepository);
     }
 }

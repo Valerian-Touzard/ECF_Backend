@@ -1,5 +1,7 @@
 package fr.valerian.formation.ecf.ecf_backend.locations;
 
+import fr.valerian.formation.ecf.ecf_backend.locations.dto.LocationFront;
+
 import java.util.List;
 
 public interface LocationService {
@@ -28,4 +30,6 @@ public interface LocationService {
      * @param id String -> L'id de la location
      */
     void deleteById(String id);
+
+    Location ajouterLocation(String idVehicule, LocationFront location);
 }
