@@ -1,5 +1,6 @@
 package fr.valerian.formation.ecf.ecf_backend.vehicules;
 
+import fr.valerian.formation.ecf.ecf_backend.locations.Location;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,8 +30,25 @@ public class VehiculeController {
         return vehiculeService.save(entity);
     }
 
+    @PostMapping("{idVehicule}/locataires/{idLocataire}/locations/{idLocation}")
+    public Vehicule ajouterLocation(
+            @PathVariable String idVehicule,
+            @PathVariable String idLocataire,
+            @RequestBody Location location
+    ) {
+        return this.vehiculeService.ajouterLocation(idLocataire, idVehicule, location);
+    }
+
     @DeleteMapping("{id}")
     public void deleteById(@PathVariable String id) {
         vehiculeService.deleteById(id);
+    }
+
+    @DeleteMapping({"{idVehicule}/locations/{idLocation}"})
+    public Vehicule supprimerLocation(
+            @PathVariable String idVehicule,
+            @PathVariable String idLocation
+    ) {
+       return vehiculeService.supprimerLocation(idVehicule, idLocation);
     }
 }
